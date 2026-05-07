@@ -8,11 +8,9 @@ import MinkowskiEngine as ME
 import numpy as np
 import pytorch_lightning as pl
 import torch
-from sklearn.cluster import DBSCAN
-
-from utils.utils import associate_instances
-
 import torch.nn.functional as F
+from sklearn.cluster import DBSCAN
+from utils.utils import associate_instances
 
 
 class PanopticSegmentation(pl.LightningModule):
@@ -138,12 +136,6 @@ class PanopticSegmentation(pl.LightningModule):
             energy = energy[inv_map]
             return normalize_minmax(energy)
 
-        def get_rba(confid, inv_map):
-            rba = -confid.tanh().sum(dim=1)[inv_map]
-            rba[rba < -1] = -1
-            rba = rba + 1
-            return rba
-
         pred_logits = output["pred_logits"]          # [B, Nq, C]
         pred_logits = torch.softmax(pred_logits, dim=-1)[..., :-1]
         pred_masks = output["pred_masks"]            # [B, N_voxel, Nq] or compatible
@@ -164,21 +156,19 @@ class PanopticSegmentation(pl.LightningModule):
                 "msp": get_msp(confid, inv_map),
                 "ml": get_ml(confid, inv_map),
                 "entropy": get_entropy(confid, inv_map),
-                "energy": get_energy(confid, inv_map),
-                "rba": get_rba(confid, inv_map),
-            }
+                "energy": get_energy(confid, inv_map),            }
 
             for score_name, score in scores.items():
-                out_dir = save_root / f"prediction_{score_name}" / seq_name
+                out_dir = save_root / f"{score_name}" / seq_name
                 out_dir.mkdir(parents=True, exist_ok=True)
                 out_path = out_dir / f"{score_name}_{frame_id}.txt"
                 np.savetxt(out_path, score.detach().cpu().numpy())
 
             # semantic prediction 只需要保存一次
             sem_preds = torch.argmax(confid, dim=1)[inv_map].detach().cpu().numpy()
-            sem_dir = save_root / "prediction_semantic" / seq_name
+            sem_dir = save_root / "predictions" / seq_name
             sem_dir.mkdir(parents=True, exist_ok=True)
-            np.savetxt(sem_dir / f"sem_preds_{frame_id}.txt", sem_preds)
+            np.savetxt(sem_dir / f"{frame_id}.txt", sem_preds)
 
         return {}
 
