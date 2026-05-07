@@ -10,5 +10,9 @@
 *.log.*
 *.sig
 
-pkg/
-src/
+# Python
+__pycache__/
+.ckpt
+.pt
+.pth
+
