@@ -1,0 +1,39 @@
+# @package data
+# Same as semantic_kitti_206.yaml but uses LidarCameraDataset which
+# also loads image_2/ images and calib.txt projection matrices.
+
+train_dataset:
+  _target_: datasets.lidar_camera.LidarCameraDataset
+  data_dir: ${data.base_path}
+  config_path: conf/mask4former3d.yaml
+  mode: ${data.train_mode}
+  add_distance: ${data.add_distance}
+  sweep: ${data.sweep}
+  instance_population: ${data.instance_population}
+  ignore_label: ${data.ignore_label}
+  volume_augmentations_path: conf/augmentation/volumentations_aug.yaml
+  img_size: ${data.img_size}
+
+validation_dataset:
+  _target_: datasets.lidar_camera.LidarCameraDataset
+  data_dir: ${data.base_path}          # database is at data/validation_database.yaml
+  config_path: conf/mask4former3d.yaml
+  mode: validation
+  add_distance: ${data.add_distance}
+  sweep: ${data.sweep}
+  instance_population: 0
+  ignore_label: ${data.ignore_label}
+  volume_augmentations_path: null
+  img_size: ${data.img_size}
+
+test_dataset:
+  _target_: datasets.lidar_camera.LidarCameraDataset
+  data_dir: ${data.base_path}          # database is at data/test_database.yaml
+  config_path: conf/mask4former3d.yaml
+  mode: test
+  add_distance: ${data.add_distance}
+  sweep: ${data.sweep}
+  instance_population: 0
+  ignore_label: ${data.ignore_label}
+  volume_augmentations_path: null
+  img_size: ${data.img_size}
