@@ -11,7 +11,7 @@ This repository is the official implementation of DriveOSS: Dataset and Benchmar
 </div>
 
 
-<p align="center">
+<!-- <p align="center">
 <img src="assets/vis2.png" width="90%" />
 </p>
 <p align="center">
@@ -25,7 +25,7 @@ distributions, with notably fewer road-surface reflections observed
 under rainy conditions.
 </em>
 </p>
-
+ -->
 
 
 **DriveOSS** is a multimodal dataset for 3D open-set semantic segmentation under adverse weather conditions in autonomous driving. It contains synchronized surround-view RGB images, 128-beam LiDAR point clouds, and GNSS/IMU measurements, collected using a custom vehicle platform equipped with six cameras and an Ouster OS1-128 LiDAR sensor.
