@@ -117,7 +117,21 @@ python3 train.py "./configs/p3former/p3former_8xb2_3x_semantickitti_cudal_driveo
 bash dist_train.sh "./P3former//configs/p3former/p3former_8xb2_3x_semantickitti_cudal_driveoss.py" 2
 ```
 #### LCPS
-```
+Prepare the dataset according to the instructions provided in the original LCPS [codebase](https://github.com/zhangzw12319/lcps).
+Note that we do not use the ```instance augmentation``` feature. Hence, the instance .pkl files are not required.
+
+Before training, edit the ```pa_po_kitti_cudal_driveosss_trainval.yaml``` config file. Then run:
+
+```bash
+cd /path/to/DriveOSS/LCPS
+
+#  single GPU
+python train.py \
+-c configs/pa_po_kitti_cudal_driveosss_trainval.yaml \
+-l ./work_dir/train.log
+
+# multi GPU
+torchrun --nproc_per_node=2 --master_port=29503 train.py -c configs/pa_po_kitti_cudal_driveosss_trainval.yaml -l ./work_dir/train.log
 
 ```
 #### Mask4Former
@@ -159,7 +173,22 @@ torchrun     --nnodes=1     --nproc_per_node=2     --master_port=29500 \
 
 ```
 #### LCPS
-```
+
+Before running inference, make sure to update the ```model_load_path``` in ```configs/pa_po_kitti_val_fusion.yaml```.
+By default, the outputs wioll be stored in the ```./LCPS``` folder. To avoid this, change the ```prediction_save_path``` inside ```infer.py```.
+```bash
+cd /path/to/DriveOSS/LCPS
+# single GPU
+python infer.py \
+-c configs/pa_po_kitti_val_fusion.yaml \
+-l ./work_dir/consol.log \
+--resume
+
+# multi GPU
+python -m torch.distributed.launch --nproc_per_node=2  infer.py \
+-c configs/pa_po_kitti_val_fusion.yaml \
+-l ./work_dir/consol.log \
+--resume
 
 ```
 #### Mask4Former
