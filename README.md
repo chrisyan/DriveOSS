@@ -109,6 +109,7 @@ Ensure that correct sequences are places in according to the split in ```fold_sp
 
 You will also need to generate these .pkl files for the DriveOSS-OOD val and test set for evaluation purposes. In this case, simply put the sequence numbers in the ´´´test´´´ key of the ```fold_split``` dictionary. Once the file is generated, rename it.  
 
+Furthermore, change the dataset_root in  ```./P3Former/configs/_base_/datasets/semantickitti_panoptic_lpmix.py``` file.
 ```bash
 # single GPU
 cd /path/to/DriveOSS/P3Former
