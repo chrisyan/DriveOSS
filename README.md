@@ -89,11 +89,34 @@ As this paper proposes a new dataset and benchmark rather than a new method, we 
 
 ## Training
 
+First download all the necessary datasets from the official sources. These are : 1) SemanticKITTI, 2) Panoptic-CUDAL, and 3) DriveOSS.
+
 To train the benchmark model(s) in the paper, run this command:
 
 #### P3Former
-```
 
+Training p3former model requires info.pkl files. You can generate these files by running the command:
+
+```bash
+cd /path/to/DriveOSS/P3Former
+python tools/create_data.py semantickitti --root-path "/path/to/semantickitti/dataset" \
+      --out-dir "path/to/semantickitti/dataset" --extra-tag semantickitti
+```
+For more information, have a look at the original p3former [codebase]("https://github.com/InternRobotics/P3Former").
+
+The information in the .pkl files is dictated by the file ```./P3former/tools/dataset_converters/semantickkitti_converter.py```.
+Ensure that correct sequences are places in according to the split in ```fold_split``` dictionary.
+
+You will also need to generate these .pkl files for the DriveOSS-OOD val and test set for evaluation purposes. In this case, simply put the sequence numbers in the ´´´test´´´ key of the ```fold_split``` dictionary. Once the file is generated, rename it.  
+
+```bash
+# single GPU
+cd /path/to/DriveOSS/P3Former
+python3 train.py "./configs/p3former/p3former_8xb2_3x_semantickitti_cudal_driveoss.py"
+# to resume, provide --checkpoint "/path/to/checkpoint" and --resume flags.
+
+# the dist_train.sh files take config path as first positional arg, and number of gpus as the second arg
+bash dist_train.sh "./P3former//configs/p3former/p3former_8xb2_3x_semantickitti_cudal_driveoss.py" 2
 ```
 #### LCPS
 ```
@@ -110,8 +133,31 @@ To train the benchmark model(s) in the paper, run this command:
 
 ## Closed-Set Evaluation
 
+For all the model, the inference script will run the inference and save the follwing ´´´.txt´´´ files for each frame in each sequence:
+- Semantic segmentation predictions as files
+- Anomaly score files for each anomaly functions mentioned in the paper.
+
 #### P3Former
-```
+
+**Important Notes** : 
+- By default, the predictions will be stored in the project root. If you
+want to save it somewhere else, make sure to change the ```prediction_save_path``` variable in function ```predict```  inside file 
+```./P3Former/p3former/segmentors/p3former.py```.
+- make sure to change the paths in the following scripts according to your setup.
+  
+```bash
+# single GPU
+cd /path/to/DriveOSS/P3Former
+python3 test.py "./configs/p3former/p3former_8xb2_3x_semantickitti_cudal_driveoss_submit.py" \
+  "./work_dirs/p3former_8xb2_3x_semantickitti_cudal_driveoss/best.pth" \
+  --work-dir "./work_dirs/p3former_8xb2_3x_semantickitti_cudal_driveoss/"
+
+# multi GPU
+torchrun     --nnodes=1     --nproc_per_node=2     --master_port=29500 \
+    test.py "./configs/p3former/p3former_8xb2_3x_semantickitti_cudal_driveoss_submit.py" \
+    "./work_dirs/p3former_8xb2_3x_semantickitti_cudal_driveoss/best.pth" \
+    --launcher pytorch \
+    --work-dir "./work_dirs/p3former_8xb2_3x_semantickitti_cudal_driveoss/"
 
 ```
 #### LCPS
