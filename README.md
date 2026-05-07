@@ -80,12 +80,9 @@ under rainy conditions.
 ## Requirements
 
 To install requirements:
-
-```setup
 As this paper proposes a new dataset and benchmark rather than a new method, we request the users to follow the instructions mentioned on the github  pages of the original works. We recommend creating separate virtual environments for each method. 
-```
 
->📋 Dataset and model weights are hosted on the harvard dataverse
+> Dataset and model weights are hosted on the harvard dataverse
 
 ## Training
 
@@ -102,7 +99,7 @@ cd /path/to/DriveOSS/P3Former
 python tools/create_data.py semantickitti --root-path "/path/to/semantickitti/dataset" \
       --out-dir "path/to/semantickitti/dataset" --extra-tag semantickitti
 ```
-For more information, have a look at the original p3former [codebase]("https://github.com/InternRobotics/P3Former").
+For more information, have a look at the original p3former [codebase](https://github.com/InternRobotics/P3Former)
 
 The information in the .pkl files is dictated by the file ```./P3former/tools/dataset_converters/semantickkitti_converter.py```.
 Ensure that correct sequences are places in according to the split in ```fold_split``` dictionary.
