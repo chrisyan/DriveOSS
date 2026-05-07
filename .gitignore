@@ -12,7 +12,7 @@
 
 # Python
 __pycache__/
-.ckpt
-.pt
-.pth
+*.ckpt
+*.pt
+*.pth
 
