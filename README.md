@@ -18,45 +18,60 @@ As this paper proposes a new dataset and benchmark rather than a new method, we 
 
 To train the benchmark model(s) in the paper, run this command:
 
-```P3Former
+#### P3Former
 ```
 
-```LCPS
+```
+#### LCPS
 ```
 
-```Mask4Former
+```
+#### Mask4Former
 ```
 
-```Mask4Former-Fusion
+```
+
+#### Mask4Former-Fusion
+```
 ```
 
 ## Closed-Set Evaluation
 
-```P3Former
+#### P3Former
 ```
 
-```LCPS
+```
+#### LCPS
 ```
 
-```Mask4Former
+```
+#### Mask4Former
 ```
 
-```Mask4Former-Fusion
+```
+
+#### Mask4Former-Fusion
+```
 ```
 
 ## Open-Set Evaluation
 
 
-```P3Former
+#### P3Former
 ```
 
-```LCPS
+```
+#### LCPS
 ```
 
-```Mask4Former
+```
+#### Mask4Former
 ```
 
-```Mask4Former-Fusion
+```
+
+#### Mask4Former-Fusion
+```
 ```
 
 ## Pre-trained Models
