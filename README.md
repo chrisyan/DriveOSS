@@ -129,7 +129,7 @@ bash dist_train.sh "./P3former//configs/p3former/p3former_8xb2_3x_semantickitti_
 ```
 ```
 
-## Closed-Set Evaluation
+## Inference and Anomaly Scoring
 
 For all the model, the inference script will run the inference and save the follwing ´´´.txt´´´ files for each frame in each sequence:
 - Semantic segmentation predictions as files
