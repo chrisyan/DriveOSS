@@ -231,22 +231,66 @@ python main_panoptic_camera_all_methods.py \
 
 ## Open-Set Evaluation
 
+After the inference you should have the following folder structure. 
 
-#### P3Former
+```tree
+outputs
+|── msp/
+|   ├── msp_000000.txt
+|   |   .
+|   ├── msp_000XXX.txt
+|── energy/
+|   ├── energy_000000.txt
+|   |   .
+|   ├── energy_000XXX.txt
+|── entropy/
+|   ├── entropy_000000.txt
+|   |   .
+|   ├── entropy_000XXX.txt
+|── maxlogit/
+|   ├── maxlogit_000000.txt
+|   |   .
+|   ├── maxlogit_000XXX.txt
+|── predictions/
+|   ├── 000000.txt
+|   |   .
+|   ├── 000XXX.txt
+```
+Now, copy all .txt files from the ```predictions``` folder to each of the anomaly scoring method folders. Each anomaly folder should contain anomaly scores for the corresponding method as well as the semantic predictions.  
+```tree
+outputs
+|── msp/
+|   ├── msp_000000.txt
+|   ├── 000000.txt
 ```
 
+#### P3Former, Mask4Former, Mask4Former-fusion
+```bash
+# change the sequences accordingly for evaluation on OOD val and OOD test set.
+# first run the evaluation on ood val set to obtain threshold for open-set evaluation on ood test set.
+# this file must be run for each anomaly method
+python evaluate_multi_sequence_openset.py \
+  --data-root "data/semantickitti/dataset/sequences" \
+  --pred-root "outputs/" \
+  --yaml "./semantic-kitti.yaml" \
+  --sequences 411 421 431 441 451 412 422 432 442 452 \
+  --output results_10seq_val_energy.json \
+  --closed-prefix ""\ # prefix of the semanticpredictions .txt file.
+  --anomaly-prefix energy_ \ # prefix of the anomaly scoring .txt file
 ```
+
 #### LCPS
-```
-
-```
-#### Mask4Former
-```
-
-```
-
-#### Mask4Former-Fusion
-```
+```bash
+# LCPS predictions are in range 1-20. Hence -pred-label-offset 1  flag
+python evaluate_multi_sequence_openset.py \
+  --data-root "data/semantickitti/dataset/sequences" \
+  --pred-root "outputs/" \
+  --yaml "./semantic-kitti.yaml" \
+  --sequences 411 421 431 441 451 412 422 432 442 452 \
+  --output results_10seq_val_energy.json \
+  --closed-prefix ""\ # prefix of the semanticpredictions .txt file.
+  --anomaly-prefix energy_ \ # prefix of the anomaly scoring .txt file
+  --pred-label-offset 1 # 1 if the prediction are in range 1 - 20. change to 0 if the predictions are in range 0-19
 ```
 
 ## Pre-trained Models
