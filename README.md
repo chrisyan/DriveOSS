@@ -135,12 +135,28 @@ torchrun --nproc_per_node=2 --master_port=29503 train.py -c configs/pa_po_kitti_
 
 ```
 #### Mask4Former
-```
 
+For both variants of Mask4Former, we follow the STU dataset [codebase](https://github.com/kumuji/stu_dataset).
+
+```bash
+cd /path/to/DriveOSS/stu_dataset/Mask4Former
+# preprocessing
+python -m datasets.preprocessing.semantic_kitti_preprocessing preprocess --data_dir "data" --save_dir "./data"
+python -m datasets.preprocessing.semantic_kitti_preprocessing make_instance_database --data_dir "data" --save_dir "./data"
+
+# train
+python main_panoptic.py model=mask4former3d data/datasets=semantic_kitti_206 general.mode=train general.gpus=2
 ```
 
 #### Mask4Former-Fusion
 ```
+cd /path/to/DriveOSS/stu_dataset/Mask4Former
+# preprocessing
+python -m datasets.preprocessing.semantic_kitti_preprocessing preprocess --data_dir "data" --save_dir "./data"
+python -m datasets.preprocessing.semantic_kitti_preprocessing make_instance_database --data_dir "data" --save_dir "./data"
+
+# train
+python main_panoptic.py model=mask4former3d data/datasets=semantic_kitti_206 general.mode=train general.gpus=2
 ```
 
 ## Inference and Anomaly Scoring
@@ -193,11 +209,24 @@ python -m torch.distributed.launch --nproc_per_node=2  infer.py \
 ```
 #### Mask4Former
 ```
+cd /path/to/DriveOSS/stu_dataset/Mask4Former
+python main_panoptic_all_methods.py \
+  model=mask4former3d \
+  data/datasets=semantic_kitti_206 \
+  general.ckpt_path=path/to/checkpoint \
+  general.mode=test
 
 ```
 
 #### Mask4Former-Fusion
 ```
+cd /path/to/DriveOSS/stu_dataset/Mask4Former
+python main_panoptic_camera_all_methods.py \
+  model=mask4former3d_camera \
+  data/datasets=semantic_kitti_206 \
+  general.ckpt_path=path/to/checkpoint \
+  general.mode=test
+
 ```
 
 ## Open-Set Evaluation
