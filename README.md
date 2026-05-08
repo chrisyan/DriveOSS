@@ -145,8 +145,7 @@ outputs
 ```
 **Important Note** : The below script (```evaluate_multi_sequence_openset.py```) expects semantic segmentation output in the range 0-19. The models P3Former and Mask4Former (both variants) follows this output format. However, the LCPS model provides output in the range 1-20. In this case, an additional flag ```--pred-label-offset 1``` must be provided to the script below. 
 
-The steps for evaluation: 
-1. first run the evaluation on the DriveOSS-OOD val set to obtain the threshold for open-iou calculation. For this purpose, use the evaluation script for each anomaly method as follows:
+Run the evaluation on the DriveOSS-OOD val set to obtain per-sequence as well as overall anomaly segmentation results (AUROC, FPR@95, AP), threshold for segmentation, closed set segmentation evaluation metrics (per class iou and global miou), and open-set results. For this purpose, use the evaluation script for each anomaly method as follows:
 ```bash
 cd /path/to/DriveOSS
 # this must be run for each anomaly method, keep in mind to change the output path and anomaly prefix flags.
@@ -159,24 +158,22 @@ python evaluate_multi_sequence_openset.py \
   --closed-prefix "" \ 
   --anomaly-prefix energy_ 
 ```
-This script will generate a json file with per-sequence as well as overall anomaly segmentation results (AUROC, FPR@95, AP), threshold for segmentation, closed set segmentation evaluation metrics (per class iou and global miou), and open-set results.
+To obtain the weather specific evaluation results, please follow the same steps as above, but replace the sequences with specific weather scenes.
 
-2. For the results on DriveOSS-OOD test set, first run the above script but change just the sequence numbers. This will generate similar json file with the content mentioned above. However, only the closed-set and anomaly segmentation metrics should be used from this script. The open-set metrics generated in this json file uses the threshold from the test set itself. Hence, it must be discarded. To obtain the actual open-set evaluation result for a given anomaly method, copy the overall ```threshold_at_TPR95``` from the json file generated using the VAL set, and run the script again:
-   
+Alternatively, run the bash file to automatically generate evaluation json for each anomaly scoring method:
+**Note**: please keep in mind to change important variables  in the bash files before running. Specifically, ```BASE_DIR``` (root path to prediction results), ```--data-root``` (path to dataset), and ```--pred-label-offset 1``` (only if the semantic prediction .txt files are in range 1-20).
+
 ```bash
 cd /path/to/DriveOSS
-python evaluate_multi_sequence_openset.py \
-  --data-root "data/semantickitti/dataset/sequences" \
-  --pred-root "outputs/" \
-  --yaml "./semantic-kitti.yaml" \
-  --sequences 413 414 423 424 433 434 443 444 453 454 \
-  --output results_10seq_test_energy.json \
-  --fixed-threshold <VAL_threshold_at_TPR95> \
-  --closed-prefix ""\ 
-  --anomaly-prefix energy_ \ 
+# to evaluate all anomaly scoring methods on the entire DriveOSS-OOD val set.
+bash eval_all_anomaly_10seq.sh
+
+# to evaluate all anomaly scoring methods on per weather sequences val set.
+bash eval_all_anomaly_per_weather.sh
 ```
 
-To obtain the weather specific evaluation results, please follow the same steps as above, but replace the sequences with specific weather scenes.
+For evaluation on the DriveOSS-OOD test set, please send us the predictions results and anomaly scores along with the json files for each anomaly scoring method (generated from using evaluation on the val set) as zip file. We will run the evalution using the ```evaluate_multi_sequence_openset.py``` script.
+
 
 ## Citation
 
