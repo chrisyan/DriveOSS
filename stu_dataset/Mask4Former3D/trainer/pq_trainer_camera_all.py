@@ -270,7 +270,7 @@ class PanopticSegmentationCamera(PanopticSegmentation):
 
             scores = {
                 "msp": get_msp(confid, inv_map),
-                "ml": get_ml(confid, inv_map),
+                "maxlogit": get_ml(confid, inv_map),
                 "entropy": get_entropy(confid, inv_map),
                 "energy": get_energy(confid, inv_map)}
 

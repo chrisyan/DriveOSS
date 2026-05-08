@@ -154,9 +154,9 @@ class PanopticSegmentation(pl.LightningModule):
 
             scores = {
                 "msp": get_msp(confid, inv_map),
-                "ml": get_ml(confid, inv_map),
+                "maxlogit": get_ml(confid, inv_map),
                 "entropy": get_entropy(confid, inv_map),
-                "energy": get_energy(confid, inv_map),            }
+                "energy": get_energy(confid, inv_map)}
 
             for score_name, score in scores.items():
                 out_dir = save_root / f"{score_name}" / seq_name
