@@ -46,8 +46,9 @@ python -m torch.distributed.launch --nproc_per_node=2  infer.py \
 
 ```
 #### Mask4Former
-```
-cd /path/to/DriveOSS/stu_dataset/Mask4Former
+
+```bash
+cd /path/to/DriveOSS/Mask4Former3D
 python main_panoptic_all_methods.py \
   model=mask4former3d \
   data/datasets=semantic_kitti_206 \
@@ -57,8 +58,8 @@ python main_panoptic_all_methods.py \
 ```
 
 #### Mask4Former-Fusion
-```
-cd /path/to/DriveOSS/stu_dataset/Mask4Former
+```bash
+cd /path/to/DriveOSS/Mask4Former3D
 python main_panoptic_camera_all_methods.py \
   model=mask4former3d_camera \
   data/datasets=semantic_kitti_206 \
