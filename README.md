@@ -103,18 +103,21 @@ under rainy conditions.
 
 The full DriveOSS dataset, along with the pretrained benchmark models are uploaded to the [dataverse](https://doi.org/10.7910/DVN/SIEZCG) 
 
-## Requirements
+## Requirements and Environment Setup
 
-To install requirements:
-As this paper proposes a new dataset and benchmark rather than a new method, we request the users to follow the instructions mentioned on the github  pages of the original works. We recommend creating separate virtual environments for each method. 
+As this paper proposes a new dataset and benchmark rather than a new method, we request theusers to follow instructions mentioned on the original codebase of the respective models. We recommend creating separate virtual environments for each method. Here are the links to official implementations of the baseline models:
+- [P3Former](https://github.com/InternRobotics/P3Former).
+- [LCPS](https://github.com/zhangzw12319/lcps).
+- [Mask4ormer3D](https://github.com/kumuji/stu_dataset/tree/main/Mask4Former3D).
+- Mask4Former3D-Fusion: same as Mask4Former3D
 
 ## Training Benchmark Models
 
-To train the benchmark models presented in the paper, you can find the detailed instructions in this [file](./docs/train_baselines.md)
+To train the benchmark models presented in the paper, you can find the detailed instructions in this [file](./docs/train_baselines.md).
 
 ## Inference and Anomaly Scoring
 
-To run inference and obtain anomaly scores on the benchmark models presented in the paper, you can find the detailed instructions in this [file](./docs/inference_on_baselines.md)
+To run inference and obtain anomaly scores on the benchmark models presented in the paper, you can find the detailed instructions in this [file](./docs/inference_on_baselines.md).
 
 ## Open-Set Evaluation
 
