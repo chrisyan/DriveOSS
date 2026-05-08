@@ -183,8 +183,7 @@ bash eval_all_anomaly_10seq.sh
 # to evaluate all anomaly scoring methods on per weather sequences val set.
 bash eval_all_anomaly_per_weather.sh
 ```
-
-For evaluation on the DriveOSS-OOD test set, please send us the predictions results and anomaly scores along with the json files for each anomaly scoring method (generated from using evaluation on the val set) as zip file. We will run the evalution using the ```evaluate_multi_sequence_openset.py``` script.
+**NOTE about DriveOSS-OOD Test Set**:  For evaluation on the DriveOSS-OOD test set, please send us the predictions results and anomaly scores along with the json files for each anomaly scoring method (generated from using evaluation on the val set) as zip file. We will run the evalution using the ```evaluate_multi_sequence_openset.py``` script.
 
 
 ## Citation
