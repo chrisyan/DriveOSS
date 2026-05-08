@@ -26,8 +26,7 @@ under rainy conditions.
 </em>
 </p>
  -->
-
-
+ 
 **DriveOSS** is a multimodal dataset for 3D open-set semantic segmentation under adverse weather conditions in autonomous driving. It contains synchronized surround-view RGB images, 128-beam LiDAR point clouds, and GNSS/IMU measurements, collected using a custom vehicle platform equipped with six cameras and an Ouster OS1-128 LiDAR sensor.
 
 #### Dataset Organization
@@ -48,24 +47,42 @@ under rainy conditions.
     open-set evaluation.
   </li>
 </ul>
-
-#### Data Collection
-<p>
-  Data was collected across public roads and industrial areas under diverse 
-  weather and lighting conditions, including clear, night, cloudy, rain, 
-  and snow. Point-wise semantic annotations were produced using an automatic 
-  annotation and human refinement workflow, with independent annotator groups 
-  for labeling and quality inspection. All sensitive information, including 
-  license plates and human faces, has been anonymized prior to release.
-</p>
-
-#### Dataset Statistics 
-<p>In total, DriveOSS contains:</p>
-<ul>
-  <li><strong>8,309</strong> LiDAR frames</li>
-  <li><strong>49,854</strong> camera images from six surround-view cameras</li>
-  <li><strong>8,309</strong> synchronized GNSS/IMU measurements</li>
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th align="left">Weather Condition</th>
+      <th align="center">OOD Validation Scenes</th>
+      <th align="center">OOD Test Scenes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Day</strong></td>
+      <td align="center">411, 412</td>
+      <td align="center">413, 414</td>
+    </tr>
+    <tr>
+      <td><strong>Night</strong></td>
+      <td align="center">421, 422</td>
+      <td align="center">423, 424</td>
+    </tr>
+    <tr>
+      <td><strong>Rain</strong></td>
+      <td align="center">441, 442</td>
+      <td align="center">443, 444</td>
+    </tr>
+    <tr>
+      <td><strong>Cloudy</strong></td>
+      <td align="center">431, 432</td>
+      <td align="center">433, 434</td>
+    </tr>
+    <tr>
+      <td><strong>Snow</strong></td>
+      <td align="center">451, 452</td>
+      <td align="center">453, 454</td>
+    </tr>
+  </tbody>
+</table>
 
 #### Important Notes
 <p>
@@ -74,9 +91,6 @@ under rainy conditions.
   2.5 GB per-file size limit imposed by the Dataverse platform, files 
   exceeding this limit have been split into multiple zip archives.
 </p>
-
----
-
 
 ## Dataset and Pre-trained Models Download
 
@@ -129,6 +143,7 @@ outputs
 |   ├── msp_000000.txt
 |   ├── 000000.txt
 ```
+**Important Note** : The below script (```evaluate_multi_sequence_openset.py```) expects semantic segmentation output in the range 0-19. The models P3Former and Mask4Former (both variants) follows this output format. However, the LCPS model provides output in the range 1-20. In this case, an additional flag ```--pred-label-offset 1``` must be provided to the script below. 
 
 The steps for evaluation: 
 1. first run the evaluation on the DriveOSS-OOD val set to obtain the threshold for open-iou calculation. For this purpose, use the evaluation script for each anomaly method as follows:
@@ -146,7 +161,7 @@ python evaluate_multi_sequence_openset.py \
 ```
 This script will generate a json file with per-sequence as well as overall anomaly segmentation results (AUROC, FPR@95, AP), threshold for segmentation, closed set segmentation evaluation metrics (per class iou and global miou), and open-set results.
 
-2. For the results on DriveOSS-OOD test set, first run the above script but change just The sequence numbers. This will generate similar json file with the content mentioned above. However, only the closed-set and anomaly segmentation metrics should be used from this script. The open-set metrics generated in this json file uses the threshold from the test set itself. Hence, it must be discarded. To obtain the actual open-set evaluation result for a given anomaly score, copy the overall ```threshold_at_TPR95``` from the json file generated using the VAL set, and run the script again:
+2. For the results on DriveOSS-OOD test set, first run the above script but change just the sequence numbers. This will generate similar json file with the content mentioned above. However, only the closed-set and anomaly segmentation metrics should be used from this script. The open-set metrics generated in this json file uses the threshold from the test set itself. Hence, it must be discarded. To obtain the actual open-set evaluation result for a given anomaly method, copy the overall ```threshold_at_TPR95``` from the json file generated using the VAL set, and run the script again:
    
 ```bash
 cd /path/to/DriveOSS
@@ -160,13 +175,9 @@ python evaluate_multi_sequence_openset.py \
   --closed-prefix ""\ 
   --anomaly-prefix energy_ \ 
 ```
-**Important Note** : The above script expects semantic segmentation output in the range 0-19. The models P3Former and Mask4Former (both variants) follows this output format. However, the LCPS model provides output in the range 1-20. In this case, an additional flag ```--pred-label-offset 1``` must be provided to the script above.  
- 
 
-## Results
-
-Open-set evaluation results on the DriveOSS-OOD test set:
-
+To obtain the weather specific evaluation results, please follow the same steps as above, but replace the sequences with specific weather scenes.
 
 ## Citation
+
 
