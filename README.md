@@ -77,12 +77,15 @@ under rainy conditions.
 
 ---
 
+
+## Dataset and Pre-trained Models Download
+
+The full DriveOSS dataset, along with the pretrained benchmark models are uploaded to the [dataverse](https://doi.org/10.7910/DVN/SIEZCG) 
+
 ## Requirements
 
 To install requirements:
 As this paper proposes a new dataset and benchmark rather than a new method, we request the users to follow the instructions mentioned on the github  pages of the original works. We recommend creating separate virtual environments for each method. 
-
-> Dataset and model weights are hosted on the harvard dataverse
 
 ## Training
 
@@ -149,7 +152,7 @@ python main_panoptic.py model=mask4former3d data/datasets=semantic_kitti_206 gen
 ```
 
 #### Mask4Former-Fusion
-```
+```bash
 cd /path/to/DriveOSS/stu_dataset/Mask4Former
 # preprocessing
 python -m datasets.preprocessing.semantic_kitti_preprocessing preprocess --data_dir "data" --save_dir "./data"
@@ -264,40 +267,38 @@ outputs
 |   ├── 000000.txt
 ```
 
-#### P3Former, Mask4Former, Mask4Former-fusion
+The steps for evaluation: 
+1. first run the evaluation on the DriveOSS-OOD val set to obtain the threshold for open-iou calculation. For this purpose, use the evaluation script for each anomaly method as follows:
 ```bash
-# change the sequences accordingly for evaluation on OOD val and OOD test set.
-# first run the evaluation on ood val set to obtain threshold for open-set evaluation on ood test set.
-# this file must be run for each anomaly method
+cd /path/to/DriveOSS
+# this must be run for each anomaly method, keep in mind to change the output path and anomaly prefix flags.
 python evaluate_multi_sequence_openset.py \
   --data-root "data/semantickitti/dataset/sequences" \
   --pred-root "outputs/" \
   --yaml "./semantic-kitti.yaml" \
   --sequences 411 421 431 441 451 412 422 432 442 452 \
   --output results_10seq_val_energy.json \
-  --closed-prefix ""\ # prefix of the semanticpredictions .txt file.
-  --anomaly-prefix energy_ \ # prefix of the anomaly scoring .txt file
+  --closed-prefix "" \ 
+  --anomaly-prefix energy_ 
 ```
+This script will generate a json file with per-sequence as well as overall anomaly segmentation results (AUROC, FPR@95, AP), threshold for segmentation, closed set segmentation evaluation metrics (per class iou and global miou), and open-set results.
 
-#### LCPS
+2. For the results on DriveOSS-OOD test set, first run the above script but change just The sequence numbers. This will generate similar json file with the content mentioned above. However, only the closed-set and anomaly segmentation metrics should be used from this script. The open-set metrics generated in this json file uses the threshold from the test set itself. Hence, it must be discarded. To obtain the actual open-set evaluation result for a given anomaly score, copy the overall ```threshold_at_TPR95``` from the json file generated using the VAL set, and run the script again:
+   
 ```bash
-# LCPS predictions are in range 1-20. Hence -pred-label-offset 1  flag
+cd /path/to/DriveOSS
 python evaluate_multi_sequence_openset.py \
   --data-root "data/semantickitti/dataset/sequences" \
   --pred-root "outputs/" \
   --yaml "./semantic-kitti.yaml" \
-  --sequences 411 421 431 441 451 412 422 432 442 452 \
-  --output results_10seq_val_energy.json \
-  --closed-prefix ""\ # prefix of the semanticpredictions .txt file.
-  --anomaly-prefix energy_ \ # prefix of the anomaly scoring .txt file
-  --pred-label-offset 1 # 1 if the prediction are in range 1 - 20. change to 0 if the predictions are in range 0-19
+  --sequences 413 414 423 424 433 434 443 444 453 454 \
+  --output results_10seq_test_energy.json \
+  --fixed-threshold <VAL_threshold_at_TPR95> \
+  --closed-prefix ""\ 
+  --anomaly-prefix energy_ \ 
 ```
-
-## Pre-trained Models
-
-You can download pretrained models here:
-
--  TODO(link). 
+**Important Note** : The above script expects semantic segmentation output in the range 0-19. The models P3Former and Mask4Former (both variants) follows this output format. However, the LCPS model provides output in the range 1-20. In this case, an additional flag ```--pred-label-offset 1``` must be provided to the script above.  
+ 
 
 ## Results
 
