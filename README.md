@@ -100,15 +100,27 @@ under rainy conditions.
 
 ## Dataset and Pre-trained Models Download
 
-The full DriveOSS dataset, along with the pretrained benchmark models are uploaded to the [dataverse](https://doi.org/10.7910/DVN/SIEZCG) 
+The full DriveOSS dataset, along with the pretrained benchmark models are uploaded to the [Dataverse](https://doi.org/10.7910/DVN/SIEZCG). 
 
 ## Requirements and Environment Setup
 
-As this paper proposes a new dataset and benchmark rather than a new method, we request theusers to follow instructions mentioned on the original codebase of the respective models. We recommend creating separate virtual environments for each method. Here are the links to official implementations of the baseline models:
-- [P3Former](https://github.com/InternRobotics/P3Former).
-- [LCPS](https://github.com/zhangzw12319/lcps).
-- [Mask4ormer3D](https://github.com/kumuji/stu_dataset/tree/main/Mask4Former3D).
+As this paper proposes a new dataset and benchmark rather than a new method, we request theusers to follow instructions mentioned on the original codebase of the respective models. We recommend creating separate virtual environments for each method as each method might require differnt torch and cuda versions. Here are the links to official implementations of the baseline models:
+- [P3Former](https://github.com/InternRobotics/P3Former)
+- [LCPS](https://github.com/zhangzw12319/lcps)
+- [Mask4ormer3D](https://github.com/kumuji/stu_dataset/tree/main/Mask4Former3D)
 - Mask4Former3D-Fusion: same as Mask4Former3D
+
+## Data Visualization
+
+```bash
+cd /path/to/DriveOSS/scripts
+
+# Visualize anomaly Ground Truth
+python3 vis_GT_outlier.py --velodyne <path/to/lidar> --label <path/to/label>
+
+# Visualize Open-set Ground Truth
+python3 vis_GT_openset.py --velodyne <path/to/lidar> --label <path/to/label>
+```
 
 ## Training Benchmark Models
 
