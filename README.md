@@ -29,6 +29,9 @@ under rainy conditions.
  
 **DriveOSS** is a multimodal dataset for 3D open-set semantic segmentation under adverse weather conditions in autonomous driving. It contains synchronized surround-view RGB images, 128-beam LiDAR point clouds, and GNSS/IMU measurements, collected using a custom vehicle platform equipped with six cameras and an Ouster OS1-128 LiDAR sensor.
 
+**NOTE about DriveOSS-OOD Test Set**: Annotations for the OOD test split are not provided in 
+  order to ensure fair and unbiased evaluation. A public evaluation server for evaluation on the DriveOSS-OOD test set is planned in the future, but for now, please send us the predictions results and anomaly scores on the test set. Please also include the evaluation results for each anomaly scoring method on the val set as zip file. These files contain threshold values for each anomaly scores, which are needed for open set evaluation on the test set. We will run the evalution using the [evaluate_multi_sequence_openset.py](./evaluate_multi_sequence_openset.py) script present in this github, follwing the same evaluation protocal as for the OOD val set.
+
 #### Dataset Organization
 
   The dataset is organized into two subsets:
@@ -95,14 +98,6 @@ under rainy conditions.
     </tr>
   </tbody>
 </table>
-
-#### Important Notes
-<p>
-  Annotations for the <strong>OOD test split are not provided</strong> in 
-  order to ensure fair and unbiased evaluation. Furthermore, due to the 
-  2.5 GB per-file size limit imposed by the Dataverse platform, files 
-  exceeding this limit have been split into multiple zip archives.
-</p>
 
 ## Dataset and Pre-trained Models Download
 
@@ -183,8 +178,6 @@ bash eval_all_anomaly_10seq.sh
 # to evaluate all anomaly scoring methods on per weather sequences val set.
 bash eval_all_anomaly_per_weather.sh
 ```
-**NOTE about DriveOSS-OOD Test Set**:  For evaluation on the DriveOSS-OOD test set, please send us the predictions results and anomaly scores along with the json files for each anomaly scoring method (generated from using evaluation on the val set) as zip file. We will run the evalution using the ```evaluate_multi_sequence_openset.py``` script.
-
 
 ## Citation
 TODO - upon acceptancce.
