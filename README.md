@@ -51,6 +51,8 @@ under rainy conditions.
   <thead>
     <tr>
       <th align="left">Weather Condition</th>
+      <th align="center">ID Train Scenes</th>
+      <th align="center">ID Validation Scenes</th>
       <th align="center">OOD Validation Scenes</th>
       <th align="center">OOD Test Scenes</th>
     </tr>
@@ -58,26 +60,36 @@ under rainy conditions.
   <tbody>
     <tr>
       <td><strong>Day</strong></td>
+       <td align="center">311, 322</td>
+      <td align="center">316</td>
       <td align="center">411, 412</td>
       <td align="center">413, 414</td>
     </tr>
     <tr>
       <td><strong>Night</strong></td>
+            <td align="center">312</td>
+      <td align="center">317</td>
       <td align="center">421, 422</td>
       <td align="center">423, 424</td>
     </tr>
     <tr>
       <td><strong>Rain</strong></td>
+            <td align="center">314</td>
+      <td align="center">319</td>
       <td align="center">441, 442</td>
       <td align="center">443, 444</td>
     </tr>
     <tr>
       <td><strong>Cloudy</strong></td>
+            <td align="center">313, 321</td>
+      <td align="center">318</td>
       <td align="center">431, 432</td>
       <td align="center">433, 434</td>
     </tr>
     <tr>
       <td><strong>Snow</strong></td>
+            <td align="center">315</td>
+      <td align="center">320</td>
       <td align="center">451, 452</td>
       <td align="center">453, 454</td>
     </tr>
@@ -176,5 +188,6 @@ For evaluation on the DriveOSS-OOD test set, please send us the predictions resu
 
 
 ## Citation
+TODO - upon acceptancce.
 
 
