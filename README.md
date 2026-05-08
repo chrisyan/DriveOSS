@@ -59,7 +59,7 @@ under rainy conditions.
   </thead>
   <tbody>
     <tr>
-      <td><strong>Day</strong></td>
+      <td><strong>Clear-Day</strong></td>
        <td align="center">311, 322</td>
       <td align="center">316</td>
       <td align="center">411, 412</td>
