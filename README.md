@@ -104,7 +104,7 @@ The full DriveOSS dataset, along with the pretrained benchmark models are upload
 
 ## Requirements and Environment Setup
 
-As this paper proposes a new dataset and benchmark rather than a new method, we request theusers to follow instructions mentioned on the original codebase of the respective models. We recommend creating separate virtual environments for each method as each method might require differnt torch and cuda versions. Here are the links to official implementations of the baseline models:
+As this paper proposes a new dataset and benchmark rather than a new method, we request the users to follow instructions mentioned on the original codebase of the respective models. We recommend creating separate virtual environments for each method as each method might require different torch and cuda versions. Here are the links to official implementations of the baseline models:
 - [P3Former](https://github.com/InternRobotics/P3Former)
 - [LCPS](https://github.com/zhangzw12319/lcps)
 - [Mask4ormer3D](https://github.com/kumuji/stu_dataset/tree/main/Mask4Former3D)
