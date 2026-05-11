@@ -5,6 +5,7 @@ import argparse
 import sys
 from pathlib import Path
 from typing import Optional
+
 import numpy as np
 
 try:
@@ -193,7 +194,7 @@ def main():
         "--velodyne",
         type=Path,
         default=Path(
-            "/media/zhiranworkstation/Expansion/tools/point_labeler/data/OOD_scenes/434/velodyne/000132.bin"
+            "data/OOD_scenes/434/velodyne/000132.bin"
         ),
         help="Path to .bin point cloud",
     )
@@ -202,7 +203,7 @@ def main():
         "--label",
         type=Path,
         default=Path(
-            "/media/zhiranworkstation/Expansion/tools/point_labeler/data/OOD_scenes/434/labels/000132.label"
+            "data/OOD_scenes/434/labels/000132.label"
         ),
         help="Path to .label file",
     )
