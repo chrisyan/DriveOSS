@@ -119,7 +119,16 @@ As this paper proposes a new dataset and benchmark rather than a new method, we 
 - Mask4Former3D-Fusion: same as Mask4Former3D
 
 ## Data Visualization
+```bash
+cd /path/to/DriveOSS
 
+conda create -n DriveOss python=3.8 -y
+
+conda activate DriveOss
+
+pip install -r requirements.txt
+
+```
 ```bash
 cd /path/to/DriveOSS/scripts
 
