@@ -209,11 +209,12 @@ Alternatively, run the bash file to automatically generate evaluation json for e
 ```bash
 cd /path/to/DriveOSS
 # to evaluate all anomaly scoring methods on the entire DriveOSS-OOD val set.
-bash eval_all_anomaly_10seq.sh
+bash eval_all_anomaly_17seq.sh
 
 # to evaluate all anomaly scoring methods on per weather sequences val set.
 bash eval_all_anomaly_per_weather.sh
 ```
+
 
 ## Citation
 TODO - upon acceptancce.
