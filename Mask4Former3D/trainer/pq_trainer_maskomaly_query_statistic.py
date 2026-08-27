@@ -1,4 +1,7 @@
+import csv
+import os
 import statistics
+import time
 from collections import defaultdict
 from contextlib import nullcontext
 from pathlib import Path
@@ -9,14 +12,7 @@ import numpy as np
 import pytorch_lightning as pl
 import torch
 from sklearn.cluster import DBSCAN
-
 from utils.utils import associate_instances
-
-import os
-
-import time
-import csv
-import os
 
 '''
 maskomaly
@@ -379,8 +375,8 @@ class PanopticSegmentation(pl.LightningModule):
             # （5）S_a：Acceptance-based
             soft_mask_acc = np.zeros(N_vox, dtype=np.float32)
             #ranking = [49, 31, 83, 32]
-                        # ranking = [49, 31, 83, 32]  # top anomaly-sensitive queries zhiran
-            ranking = [9, 15, 16, 2]  # top anomaly-sensitive queries zhiran
+                        # ranking = [49, 31, 83, 32]  # top anomaly-sensitive queries 
+            ranking = [9, 15, 16, 2]  # top anomaly-sensitive queries 
             for ind in ranking:
                 if 0 <= ind < Q:
                     conf = float(cls_probs[ind].max())

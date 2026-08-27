@@ -1,5 +1,6 @@
 import os
 import struct
+
 import numpy as np
 
 
@@ -52,6 +53,6 @@ def convert_folder_ascii(bin_folder, pcd_folder):
             print(f"Converted {bin_file_path} to {pcd_file_path}")
 
 
-bin_folder = '/media/ubuntu22/HDD22T/_Sourabh/stu_dataset/data/stu_dataset/validation/141/velodyne'
-pcd_folder = '/media/ubuntu22/HDD22T/_Sourabh/stu_dataset/data/stu_dataset/validation/141/lidar_pcd_ascii'
+bin_folder = './stu_dataset/data/stu_dataset/validation/141/velodyne'
+pcd_folder = './stu_dataset/data/stu_dataset/validation/141/lidar_pcd_ascii'
 convert_folder_ascii(bin_folder, pcd_folder)

@@ -14,9 +14,6 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 import yaml
-from nuscenes import NuScenes
-from tqdm import tqdm
-
 from dataloader.dataset import (
     Nuscenes_pt,
     SemKITTI_pt,
@@ -27,6 +24,8 @@ from dataloader.dataset import (
 from dataloader.eval_sampler import SequentialDistributedSampler
 from network.ptBEV import ptBEVnet
 from network.util.instance_post_processing import get_panoptic_segmentation
+from nuscenes import NuScenes
+from tqdm import tqdm
 from utils.AppLogger import AppLogger
 from utils.eval_pq import PanopticEval
 from utils.metric_util import fast_hist_crop, per_class_iu
@@ -61,7 +60,8 @@ def save_uncertainty_scores(
     msp_3d,
     energy,
     maxlogit,
-    entropy
+    entropy,
+    rba
 ):
     """
     Save uncertainty scores for all methods in .txt format
@@ -70,7 +70,8 @@ def save_uncertainty_scores(
         "maxlogit": os.path.join(prediction_path, "maxlogit", seq_id),
         "msp": os.path.join(prediction_path, "msp", seq_id),
         "entropy": os.path.join(prediction_path, "entropy", seq_id),
-        "energy": os.path.join(prediction_path, "energy", seq_id)}
+        "energy": os.path.join(prediction_path, "energy", seq_id),
+        "rba": os.path.join(prediction_path, "rba", seq_id)}
     
     for d in dirs.values():
         os.makedirs(d, exist_ok=True)
@@ -97,6 +98,7 @@ def save_uncertainty_scores(
     save("msp", msp_3d)
     save("entropy", entropy)
     save("energy", energy)
+    save("rba", rba)
 
     print(f"Saved uncertainties for {seq_id}/{frame_str}")
 
@@ -360,6 +362,7 @@ def main():
                 # Entropy
                 entropy = -torch.sum(point_probs * torch.log(point_probs + 1e-8), dim=1)  # [N]
                 #print(val_dict["lidar_token"][count].split('_')[0], val_dict["lidar_token"][count].split('_')[1])
+                rba = (-torch.sum(torch.tanh(point_logits), dim=1)).clamp(min=-1) + 1
 
                 save_uncertainty_scores(
                     prediction_path=prediction_save_path,
@@ -369,7 +372,8 @@ def main():
                     maxlogit=normalize(max_logit),
                     msp_3d=normalize(msp),
                     entropy=normalize(entropy),
-                    energy=normalize(energy)
+                    energy=normalize(energy),
+                    rba=normalize(rba)
                 )
         
                 # 语义分割预测出是前景类别，但是全景分割预测它是背景(全景ID预测为0)，当作noise处理

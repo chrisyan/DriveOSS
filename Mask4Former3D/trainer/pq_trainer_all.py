@@ -136,6 +136,14 @@ class PanopticSegmentation(pl.LightningModule):
             energy = energy[inv_map]
             return normalize_minmax(energy)
 
+        def get_rba(logit, mask, inv_map):
+            confid = mask.float().sigmoid().matmul(logit)
+            rba = -confid.tanh().sum(dim=1)[inv_map]
+            rba[rba < -1] = -1
+            rba = rba + 1
+            return normalize_minmax(rba)
+
+
         pred_logits = output["pred_logits"]          # [B, Nq, C]
         pred_logits = torch.softmax(pred_logits, dim=-1)[..., :-1]
         pred_masks = output["pred_masks"]            # [B, N_voxel, Nq] or compatible
@@ -156,7 +164,9 @@ class PanopticSegmentation(pl.LightningModule):
                 "msp": get_msp(confid, inv_map),
                 "maxlogit": get_ml(confid, inv_map),
                 "entropy": get_entropy(confid, inv_map),
-                "energy": get_energy(confid, inv_map)}
+                "energy": get_energy(confid, inv_map),
+                "rba": get_rba(pred_logits[b_idx], pred_masks[b_idx], inverse_maps[b_idx]
+            )}
 
             for score_name, score in scores.items():
                 out_dir = save_root / f"{score_name}" / seq_name

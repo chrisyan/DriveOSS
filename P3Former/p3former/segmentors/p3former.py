@@ -76,7 +76,8 @@ class _P3Former(Cylinder3D):
         msp_3d,
         energy,
         maxlogit,
-        entropy
+        entropy,
+        rba
     ):
         """
         Save uncertainty scores for all methods in .txt format
@@ -85,7 +86,8 @@ class _P3Former(Cylinder3D):
             "maxlogit": os.path.join(prediction_path, "maxlogit", seq_id),
             "msp": os.path.join(prediction_path, "msp", seq_id),
             "entropy": os.path.join(prediction_path, "entropy", seq_id),
-            "energy": os.path.join(prediction_path, "energy", seq_id)}
+            "energy": os.path.join(prediction_path, "energy", seq_id),
+            "rba": os.path.join(prediction_path, "rba", seq_id)}
         
         for d in dirs.values():
             os.makedirs(d, exist_ok=True)
@@ -112,6 +114,7 @@ class _P3Former(Cylinder3D):
         save("msp", msp_3d)
         save("entropy", entropy)
         save("energy", energy)
+        save("rba", rba)
 
         print(f"Saved uncertainties for {seq_id}/{frame_str}")
 
@@ -144,6 +147,8 @@ class _P3Former(Cylinder3D):
             max_logit_pts = self.normalize(max_logit_pts)
             energy_pts = self.normalize(energy_pts)
             entropy_pts = self.normalize(entropy_pts)
+            rba = (-torch.sum(torch.tanh(confid), dim=1)).clamp(min=-1) + 1
+            rba_pts = self.normalize(rba)
 
             pred_labels = pts_semantic_preds[batch_idx]
 
@@ -163,7 +168,8 @@ class _P3Former(Cylinder3D):
                     msp_3d=msp_pts,
                     energy=energy_pts,
                     entropy=entropy_pts,
-                    maxlogit=max_logit_pts
+                    maxlogit=max_logit_pts,
+                    rba=rba_pts
                 )
     
         # ANOMALY SCORING END

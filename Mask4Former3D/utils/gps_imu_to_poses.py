@@ -5,11 +5,13 @@
 #Combine them into a 3×4 transformation matrix (rotation + translation)
 #Format the output as specified
 
-import re
-import os
-from pyproj import Transformer, CRS
-import numpy as np
 import math
+import os
+import re
+
+import numpy as np
+from pyproj import CRS, Transformer
+
 
 def parse_gps(file_path):
 
@@ -167,10 +169,10 @@ def generate_poses(gps_folder, imu_folder, output_file="poses.txt"):
 
 if __name__ == "__main__":
 
-    gps_file_path = "/media/ubuntu22/HDD22T/_Sourabh/stu_dataset/Mask4Former3D/data/test/200/gps/000196.txt"
-    gps_folder_path = "/media/ubuntu22/HDD22T/_Sourabh/stu_dataset/Mask4Former3D/data/test/200/gps"
-    imu_file_path = "/media/ubuntu22/HDD22T/_Sourabh/stu_dataset/Mask4Former3D/data/test/200/imu/000196.txt"
-    imu_folder_path = "/media/ubuntu22/HDD22T/_Sourabh/stu_dataset/Mask4Former3D/data/test/200/imu"
+    gps_file_path = "./stu_dataset/Mask4Former3D/data/test/200/gps/000196.txt"
+    gps_folder_path = "./stu_dataset/Mask4Former3D/data/test/200/gps"
+    imu_file_path = "./stu_dataset/Mask4Former3D/data/test/200/imu/000196.txt"
+    imu_folder_path = "./stu_dataset/Mask4Former3D/data/test/200/imu"
     
     '''
     gps_results = parse_gps_directory(gps_folder_path)

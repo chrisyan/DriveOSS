@@ -1,18 +1,21 @@
 
 import sys
-project_root = "/media/ubuntu22/HDD22T/_Sourabh/stu_dataset/Mask4Former3D"
+
+project_root = "./stu_dataset/Mask4Former3D"
 sys.path.append(project_root)
 
 import logging
 import os
+from collections import defaultdict
+
 import hydra
+import MinkowskiEngine as ME
+import numpy as np
+import torch
 from omegaconf import DictConfig, OmegaConf
 from pq_trainer import PanopticSegmentation
 from utils.utils import flatten_dict
-import torch
-import MinkowskiEngine as ME
-from collections import defaultdict
-import numpy as np
+
 
 def save_pred_logits(pred_logits, batch_idx):
     """Save raw logits to a text file with batch index"""

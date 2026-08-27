@@ -4,7 +4,7 @@
 # from the original implementation of some methods e.g. Cylinder3D.
 dataset_type = '_SemanticKittiDataset'
 data_root = 'data/semantickitti/'
-#data_root = "/media/computer/New Volume1/zhiran/PMF-master/data/semantic-kitti" 
+#data_root = " 
 class_names = [
     'car', 'bicycle', 'motorcycle', 'truck', 'bus', 'person', 'bicyclist',
     'motorcyclist', 'road', 'parking', 'sidewalk', 'other-ground', 'building',

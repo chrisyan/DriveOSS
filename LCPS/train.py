@@ -12,14 +12,6 @@ import numpy as np
 import torch
 import torch.optim as optim
 import yaml
-from nuscenes import NuScenes
-from torch.optim.lr_scheduler import (
-    CosineAnnealingLR,
-    CosineAnnealingWarmRestarts,
-    MultiStepLR,
-)
-from tqdm import tqdm
-
 from dataloader.dataset import (
     Nuscenes_pt,
     SemKITTI_pt,
@@ -31,6 +23,13 @@ from dataloader.eval_sampler import SequentialDistributedSampler
 from network.ptBEV import ptBEVnet
 from network.util.instance_post_processing import get_panoptic_segmentation
 from network.util.loss import PanopticLoss, PixelLoss
+from nuscenes import NuScenes
+from torch.optim.lr_scheduler import (
+    CosineAnnealingLR,
+    CosineAnnealingWarmRestarts,
+    MultiStepLR,
+)
+from tqdm import tqdm
 from utils.AppLogger import AppLogger
 from utils.eval_pq import PanopticEval
 from utils.metric_util import fast_hist_crop, per_class_iu
@@ -525,5 +524,5 @@ if __name__ == '__main__':
     main()
 
 """
-torchrun --nproc_per_node=2 --master_port=29503 train.py -c configs/pa_po_kitti_trainval.yaml -l "/media/computer/New Volume/zhiran/lcps/work_dir/kitti_cudal_osaw_wo_aug_lidar_only/train.log"
+torchrun --nproc_per_node=2 --master_port=29503 train.py -c configs/pa_po_kitti_cudal_driveoss_trainval.yaml -l "./work_dirs//train.log"
 """

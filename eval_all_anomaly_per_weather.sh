@@ -1,6 +1,6 @@
 #!/bin/bash
 
-METHODS=("energy" "entropy" "maxlogit" "msp")
+METHODS=("energy" "entropy" "maxlogit" "msp" "rba")
 
 declare -A WEATHER_SCENES
 WEATHER_SCENES["Day"]="411 412"

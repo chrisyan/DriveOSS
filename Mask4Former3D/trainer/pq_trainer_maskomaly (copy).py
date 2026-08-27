@@ -1,3 +1,4 @@
+import os
 import statistics
 from collections import defaultdict
 from contextlib import nullcontext
@@ -9,10 +10,7 @@ import numpy as np
 import pytorch_lightning as pl
 import torch
 from sklearn.cluster import DBSCAN
-
 from utils.utils import associate_instances
-
-import os
 
 '''
 maskomaly
@@ -298,7 +296,7 @@ class PanopticSegmentation(pl.LightningModule):
             soft_mask_acc = np.zeros(num_voxel_points, dtype=np.float32)
             print("soft_mask_acc", soft_mask_acc.shape)
             ranking = [9, 15, 16, 2]  # top anomaly-sensitive queries
-            #ranking = [49, 31, 83, 32]  # top anomaly-sensitive queries zhiran
+            #ranking = [49, 31, 83, 32]  # top anomaly-sensitive queries 
             for ind in ranking:
                 if ind < num_queries:
                     conf = np.max(cls_probs[ind])
@@ -308,7 +306,7 @@ class PanopticSegmentation(pl.LightningModule):
             # Final Maskomaly Soft Mask (S)
             # -------------------------------
             final_soft_mask_voxel = 0.6 * soft_mask_rej + 0.4 * soft_mask_acc  # shape: [N_voxel_points]
-            #final_soft_mask_voxel = 0.6 * soft_mask_rej + 0.4 * soft_mask_acc  # shape: [N_voxel_points] zhiran
+            #final_soft_mask_voxel = 0.6 * soft_mask_rej + 0.4 * soft_mask_acc  # shape: [N_voxel_points] 
             print("final_soft_mask_voxel", final_soft_mask_voxel.shape)
 
             # -------------------------------

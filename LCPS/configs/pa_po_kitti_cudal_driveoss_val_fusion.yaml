@@ -18,7 +18,7 @@ model:
     monocular : True
     use_att: True
     # checkpoint
-    model_load_path: null
+    model_load_path: ""
     val_batch_size: 2
     post_proc:
         threshold: 0.1

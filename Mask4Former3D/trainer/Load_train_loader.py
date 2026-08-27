@@ -1,19 +1,21 @@
 
 import sys
-project_root = "/media/ubuntu22/HDD22T/_Sourabh/stu_dataset/Mask4Former3D"
+
+project_root = "./stu_dataset/Mask4Former3D"
 sys.path.append(project_root)
 
 import logging
 import os
+from collections import defaultdict
+from pathlib import Path
+
 import hydra
+import MinkowskiEngine as ME
+import numpy as np
+import torch
 from omegaconf import DictConfig, OmegaConf
 from pq_trainer import PanopticSegmentation
 from utils.utils import flatten_dict
-import torch
-import MinkowskiEngine as ME
-from collections import defaultdict
-import numpy as np
-from pathlib import Path
 
 # Initialize logging
 logger = logging.getLogger(__name__)
@@ -25,7 +27,7 @@ def get_dataloader(cfg: DictConfig):
     # Change back to original working directory (same as main_panoptic.py)
     os.chdir(hydra.utils.get_original_cwd())
 
-    #checkpoint_path = "/media/ubuntu22/HDD22T/_Sourabh/stu_dataset/Mask4Former3D/checkpoints/Ensemble_model_1.ckpt"
+    #checkpoint_path = "./stu_dataset/Mask4Former3D/checkpoints/Ensemble_model_1.ckpt"
     
     # Load model from checkpoint if provided and initialize the model with same config
     ckpt_path = cfg.general.ckpt_path

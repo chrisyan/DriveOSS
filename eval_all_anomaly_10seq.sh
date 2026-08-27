@@ -1,6 +1,6 @@
 #!/bin/bash
 
-METHODS=("energy" "entropy" "maxlogit" "msp")
+METHODS=("energy" "entropy" "maxlogit" "msp" "rba")
 
 BASE_DIR="./outputs"
 
