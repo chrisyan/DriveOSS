@@ -190,13 +190,14 @@ outputs
 Run the evaluation on the DriveOSS-OOD val set to obtain per-sequence as well as overall anomaly segmentation results (AUROC, FPR@95, AP), threshold for segmentation, closed set segmentation evaluation metrics (per class iou and global miou), and open-set results. For this purpose, use the evaluation script for each anomaly method as follows:
 ```bash
 cd /path/to/DriveOSS
-# this must be run for each anomaly method, keep in mind to change the output path, anomaly prefix flags, and sequences flag.
+# this must be run for each anomaly method.
+# keep in mind to change the output path, anomaly prefix flags, and sequences flag.
 python evaluate_multi_sequence_openset.py \
   --data-root "data/semantickitti/dataset/sequences" \
   --pred-root "outputs/" \
   --yaml "./semantic-kitti.yaml" \
-  --sequences 411 421 431 441 451 412 422 432 442 452 \
-  --output results_10seq_val_energy.json \
+  --sequences 411 421 431 441 451 412 422 432 442 452 461 462 463 464 465 467 \
+  --output results_17seq_val_energy.json \
   --closed-prefix "" \ 
   --anomaly-prefix energy_ 
 ```
