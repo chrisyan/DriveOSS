@@ -15,8 +15,8 @@ for i in "${METHODS[@]}"; do
         --data-root "" \
         --pred-root "${BASE_DIR}/${i}" \
         --yaml "./semantic-kitti.yaml" \
-        --sequences 411 421 431 441 451 412 422 432 442 452 \
-        --output "${BASE_DIR}/val_results/ood_val_10seq_${i}.json" \
+        --sequences 411 421 431 441 451 412 422 432 442 452 461 462 463 464 465 466 467 \
+        --output "${BASE_DIR}/val_results/ood_val_17seq_${i}.json" \
         --closed-prefix "" \
         --anomaly-prefix "${i}_" 
 
