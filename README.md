@@ -62,10 +62,10 @@ under rainy conditions.
   <tbody>
     <tr>
       <td><strong>Clear-Day</strong></td>
-       <td align="center">311, 322</td>
-      <td align="center">316</td>
-      <td align="center">411, 412</td>
-      <td align="center">413, 414</td>
+       <td align="center">311, 322, 324, 327</td>
+      <td align="center">316, 323, 325, 326, 329, 330</td>
+      <td align="center">411, 412, 461, 462, 463, 463, 465, 566, 567</td>
+      <td align="center">413, 414, 471, 472, 473, 474, 475, 476</td>
     </tr>
     <tr>
       <td><strong>Night</strong></td>
@@ -107,6 +107,7 @@ The full DriveOSS dataset, along with the pretrained benchmark models are upload
 As this paper proposes a new dataset and benchmark rather than a new method, we request the users to follow instructions mentioned on the original codebase of the respective models. We recommend creating separate virtual environments for each method as each method might require different torch and cuda versions. Here are the links to official implementations of the baseline models:
 - [P3Former](https://github.com/InternRobotics/P3Former)
 - [LCPS](https://github.com/zhangzw12319/lcps)
+- LCPS-Fusion: same as LCPS
 - [Mask4ormer3D](https://github.com/kumuji/stu_dataset/tree/main/Mask4Former3D)
 - Mask4Former3D-Fusion: same as Mask4Former3D
 
@@ -152,6 +153,10 @@ outputs
 |   ├── maxlogit_000000.txt
 |   |   .
 |   ├── maxlogit_000XXX.txt
+|── rba/
+|   ├── rba_000000.txt
+|   |   .
+|   ├── rba_000XXX.txt
 |── predictions/
 |   ├── 000000.txt
 |   |   .
