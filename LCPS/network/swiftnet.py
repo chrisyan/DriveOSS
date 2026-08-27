@@ -2,6 +2,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+
 # import torch.utils.model_zoo as model_zoo
 
 
@@ -236,7 +237,6 @@ def SwiftNetRes18(num_feature=(128, 128, 128),pretrained_path=None):
         pretrained (bool): If True, returns a model pre-trained on ImageNet
     """
     model = SwiftNetResNet(BasicBlock, [2, 2, 2, 2], num_feature, build_decoder=True)
-    # pretrained_path = '/home/group3d/yq/CVPR2022_ID2833_Code/pretrain/resnet18-5c106cde.pth'
     if pretrained_path is not None:
         print("load pretrained weigth from", pretrained_path)
         model.load_state_dict(torch.load(pretrained_path, map_location=torch.device('cpu')), strict=False)
