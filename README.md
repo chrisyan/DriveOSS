@@ -181,7 +181,7 @@ outputs
 Run the evaluation on the DriveOSS-OOD val set to obtain per-sequence as well as overall anomaly segmentation results (AUROC, FPR@95, AP), threshold for segmentation, closed set segmentation evaluation metrics (per class iou and global miou), and open-set results. For this purpose, use the evaluation script for each anomaly method as follows:
 ```bash
 cd /path/to/DriveOSS
-# this must be run for each anomaly method, keep in mind to change the output path and anomaly prefix flags.
+# this must be run for each anomaly method, keep in mind to change the output path, anomaly prefix flags, and sequences flag.
 python evaluate_multi_sequence_openset.py \
   --data-root "data/semantickitti/dataset/sequences" \
   --pred-root "outputs/" \
@@ -194,7 +194,7 @@ python evaluate_multi_sequence_openset.py \
 To obtain the weather specific evaluation results, please follow the same steps as above, but replace the sequences with specific weather scenes.
 
 Alternatively, run the bash file to automatically generate evaluation json for each anomaly scoring method:
-**Note**: please keep in mind to change important variables  in the bash files before running. Specifically, ```BASE_DIR``` (root path to prediction results), ```--data-root``` (path to dataset), and ```--pred-label-offset 1``` (only if the semantic prediction .txt files are in range 1-20).
+**Note**: please keep in mind to change important variables  in the bash files before running. Specifically, ```BASE_DIR``` (root path to prediction results), ```--data-root``` (path to dataset),```--sequences``` (list of sequences to evaluate),  and ```--pred-label-offset 1``` (only if the semantic prediction .txt files are in range 1-20).
 
 ```bash
 cd /path/to/DriveOSS
