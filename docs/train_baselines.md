@@ -30,15 +30,18 @@ python3 train.py "./configs/p3former/p3former_8xb2_3x_semantickitti_cudal_driveo
 # the dist_train.sh files take config path as first positional arg, and number of gpus as the second arg
 bash dist_train.sh "./P3former//configs/p3former/p3former_8xb2_3x_semantickitti_cudal_driveoss.py" 2
 ```
-#### LCPS
+#### LCPS and LCPS-Fusion
 Prepare the dataset according to the instructions provided in the original LCPS [codebase](https://github.com/zhangzw12319/lcps).
 Note that we do not use the ```instance augmentation``` feature. Hence, the instance .pkl files are not required.
 
-Before training, edit the ```pa_po_kitti_cudal_driveosss_trainval.yaml``` config file. Then run:
+Before training, edit the ```configs/pa_po_kitti_cudal_driveoss_trainval.yaml``` config file for the lidar only method, and  ``configs/pa_po_kitti_cudal_driveoss_trainval_fusion.yaml``` . 
+
+Then run:
 
 ```bash
 cd /path/to/DriveOSS/LCPS
 
+#
 #  single GPU
 python train.py \
 -c configs/pa_po_kitti_cudal_driveosss_trainval.yaml \
@@ -46,6 +49,8 @@ python train.py \
 
 # multi GPU
 torchrun --nproc_per_node=2 --master_port=29503 train.py -c configs/pa_po_kitti_cudal_driveosss_trainval.yaml -l ./work_dir/train.log
+
+For training fusion model, simply replace the config file with ``configs/pa_po_kitti_cudal_driveoss_trainval_fusion.yaml``` 
 
 ```
 #### Mask4Former
