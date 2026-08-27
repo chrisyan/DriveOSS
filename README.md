@@ -107,7 +107,8 @@ under rainy conditions.
 
 ## Dataset and Pre-trained Models Download
 
-The full DriveOSS dataset, along with the pretrained benchmark models are uploaded to the [Dataverse](https://doi.org/10.7910/DVN/SIEZCG). 
+The full DriveOSS dataset, along with the pretrained benchmark models  will be made publicly available upon acceptance.
+
 
 ## Requirements and Environment Setup
 
