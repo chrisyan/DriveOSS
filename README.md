@@ -34,7 +34,7 @@ under rainy conditions.
 </p> -->
 
  
-**DriveOSS** is a multimodal dataset for 3D open-set semantic segmentation under adverse weather conditions in autonomous driving. It contains synchronized surround-view RGB images, 128-beam LiDAR point clouds, and GNSS/IMU measurements, collected using a custom vehicle platform equipped with six cameras and an Ouster OS1-128 LiDAR sensor.
+**DriveOSS** is a multimodal dataset for 3D open-set semantic segmentation autonomous driving. It contains 12,661 synchronized and annotated frames captured using six surround-view RGB cameras, a 128-beam LiDAR, and a GPS/IMU unit. The dataset comprises 52 real-world driving scenes collected under clear, nighttime, cloudy, rainy, and snowy conditions and is organized into ID (in-distribution) and OOD (out-of-distribution) subsets.
 
 **NOTE about DriveOSS-OOD Test Set**: Annotations for the OOD test split are not provided in order to ensure fair and unbiased evaluation. A public evaluation server for evaluation on the DriveOSS-OOD test set is planned upon acceptance in the future, but for now, please send us the predictions results and anomaly scores on the test set. Please also include the evaluation results for each anomaly scoring method on the val set as a zip file. These files contain threshold values for each anomaly scores, which are needed for open set evaluation on the test set. We will run the evaluation using the [evaluate_multi_sequence_openset.py](./evaluate_multi_sequence_openset.py) script present in this github, follwing the same evaluation protocol as for the OOD val set.
 
