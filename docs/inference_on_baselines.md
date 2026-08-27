@@ -29,23 +29,23 @@ torchrun     --nnodes=1     --nproc_per_node=2     --master_port=29500 \
 #### LCPS and LCPS-Fusion
 
 
-Before running inference, make sure to update the ```model_load_path``` in ```configs/pa_po_kitti_val_fusion.yaml```.
-By default, the outputs wioll be stored in the ```./LCPS``` folder. To avoid this, change the ```prediction_save_path``` inside ```infer.py```.
+Before running inference, make sure to update the ```model_load_path``` in ```configs/pa_po_kitti_cudal_driveoss_val.yaml``` or ``configs/pa_po_kitti_cudal_driveoss_val_fusion.yaml``` depending on the type  of model (lidar only or fusion).
+By default, the outputs will be stored in the ```./outputs``` folder. To avoid this, change the ```prediction_save_path``` inside ```infer.py```.
 ```bash
 cd /path/to/DriveOSS/LCPS
 # single GPU
 python infer.py \
--c configs/pa_po_kitti_val_fusion.yaml \
+-c configs/pa_po_kitti_cudal_driveoss_val.yaml \
 -l ./work_dir/consol.log \
 --resume
 
 # multi GPU
 python -m torch.distributed.launch --nproc_per_node=2  infer.py \
--c configs/pa_po_kitti_val_fusion.yaml \
+-c configs/pa_po_kitti_cudal_driveoss_val.yaml \
 -l ./work_dir/consol.log \
 --resume
 
-For lidar only model, use ```configs/pa_po_kitti_val.yaml``` config. The rest of the code remains the same
+For fusion only model, use ```configs/pa_po_kitti_cudal_driveoss_val_fusion.yaml``` config. The rest of the code remains the same
 
 ```
 #### Mask4Former
