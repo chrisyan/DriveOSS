@@ -26,7 +26,8 @@ torchrun     --nnodes=1     --nproc_per_node=2     --master_port=29500 \
     --work-dir "./work_dirs/p3former_8xb2_3x_semantickitti_cudal_driveoss/"
 
 ```
-#### LCPS
+#### LCPS and LCPS-Fusion
+
 
 Before running inference, make sure to update the ```model_load_path``` in ```configs/pa_po_kitti_val_fusion.yaml```.
 By default, the outputs wioll be stored in the ```./LCPS``` folder. To avoid this, change the ```prediction_save_path``` inside ```infer.py```.
@@ -43,6 +44,8 @@ python -m torch.distributed.launch --nproc_per_node=2  infer.py \
 -c configs/pa_po_kitti_val_fusion.yaml \
 -l ./work_dir/consol.log \
 --resume
+
+For lidar only model, use ```configs/pa_po_kitti_val.yaml``` config. The rest of the code remains the same
 
 ```
 #### Mask4Former
