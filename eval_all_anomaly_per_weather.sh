@@ -3,7 +3,7 @@
 METHODS=("energy" "entropy" "maxlogit" "msp" "rba")
 
 declare -A WEATHER_SCENES
-WEATHER_SCENES["Day"]="411 412"
+WEATHER_SCENES["Day"]="411 412 461 462 463 464 465 466 467"
 WEATHER_SCENES["Night"]="421 422"
 WEATHER_SCENES["Rain"]="441 442"
 WEATHER_SCENES["Cloudy"]="431 432"
