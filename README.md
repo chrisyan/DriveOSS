@@ -38,6 +38,14 @@ under rainy conditions.
 
 **NOTE about DriveOSS-OOD Test Set**: Annotations for the OOD test split are not provided in order to ensure fair and unbiased evaluation. A public evaluation server for evaluation on the DriveOSS-OOD test set is planned upon acceptance in the future, but for now, please send us the predictions results and anomaly scores on the test set. Please also include the evaluation results for each anomaly scoring method on the val set as a zip file. These files contain threshold values for each anomaly scores, which are needed for open set evaluation on the test set. We will run the evaluation using the [evaluate_multi_sequence_openset.py](./evaluate_multi_sequence_openset.py) script present in this github, follwing the same evaluation protocol as for the OOD val set.
 
+---
+
+## 🗞️ News
+
+* **2026-10-14**: DriveOSS Accepted at WACV 2027
+---
+
+
 #### Dataset Organization
 
   The dataset is organized into two subsets:
