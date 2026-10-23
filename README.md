@@ -1,12 +1,27 @@
+<div align="center">
+ 
 # DriveOSS: Dataset and Benchmark for 3D Anomaly Segmentation and Open-set Semantic Segmentation in Autonomous Driving
 
+### 🌟 Accepted at WACV 2027 dataset track 🌟
 
 [![Project](https://img.shields.io/badge/Project-Page-blue.svg)](https://bhanderisavan.github.io/publications/2027/driveoss/)&nbsp;&nbsp;
 [![arXiv](https://img.shields.io/badge/arXiv-Paper-red.svg)]()&nbsp;&nbsp;
+[![dataset](https://img.shields.io/badge/DriveOSS-Dataset-green)]()&nbsp;&nbsp;
 
-This repository is the official implementation of DriveOSS: Dataset and Benchmark for 3D Open-set Segmentation under Adverse Weather in Autonomous Driving. 
+
+[Zhiran Yan](https://www.linkedin.com/in/zhiran-yan-73b3b7197/)<sup>1,<a href="mailto:zhiran.yan@outlook.com?subject=DriveOSS" style="color: #4799e0; text-decoration: underline;">📧</a></sup>,&nbsp;
+[Savankumar Bhanderi](https://bhanderisavan.github.io)<sup>1</sup>,&nbsp;
+[Sourabh Lolge](https://www.linkedin.com/in/sourabh-lolge-398b26118/)<sup>1</sup>,&nbsp;
+[Rui Song](https://rruisong.github.io/)<sup>2</sup>,&nbsp;
+[Girdharbhai Paneliya](https://linkedin.com/in/girdharbhai-paneliya-b609261a9)<sup>1</sup>,&nbsp;
+[Shiva Agrawal](https://linkedin.com/in/shiva-agrawal-06562510a)<sup>1</sup>,&nbsp;
+[Gordon Elger](https://linkedin.com/in/gordon-elger-48a658)<sup>1</sup>
 
 
+<sup>1</sup> [Institute of Innovative Mobility (IIMo), THI](https://www.thi.de/en/research/iimo-institute-of-innovative-mobility/)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<sup>2</sup> [Mobility Lab, UCLA](https://mobility-lab.seas.ucla.edu/)
+
+</div>
 
 <p align="center">
 <img  src="assets/figure_1.png" width="90%" />
@@ -18,12 +33,12 @@ This repository is the official implementation of DriveOSS: Dataset and Benchmar
 <!-- <p align="center">
 <img src="assets/vis2.png" width="90%" />
 </p> -->
-<p align="center">
+<!-- <p align="center">
 <img  src="assets/anomaly_objects.png" width="90%" />
 </p>
 <p align="center">
  <em>
-Representative anomalies in the DriveOSS dataset.
+Representative anomalies in the DriveOSS dataset. -->
 </em>
 </p>
 <!-- <em>
@@ -37,19 +52,41 @@ under rainy conditions.
 </em>
 </p> -->
 
- 
-**DriveOSS** is a multimodal dataset for 3D open-set semantic segmentation autonomous driving. It contains 12,661 synchronized and annotated frames captured using six surround-view RGB cameras, a 128-beam LiDAR, and a GPS/IMU unit. The dataset comprises 52 real-world driving scenes collected under clear, nighttime, cloudy, rainy, and snowy conditions and is organized into ID (in-distribution) and OOD (out-of-distribution) subsets.
-
-**NOTE about DriveOSS-OOD Test Set**: Annotations for the OOD test split are not provided in order to ensure fair and unbiased evaluation. A public evaluation server for evaluation on the DriveOSS-OOD test set is planned upon acceptance in the future, but for now, please send us the predictions results and anomaly scores on the test set. Please also include the evaluation results for each anomaly scoring method on the val set as a zip file. These files contain threshold values for each anomaly scores, which are needed for open set evaluation on the test set. We will run the evaluation using the [evaluate_multi_sequence_openset.py](./evaluate_multi_sequence_openset.py) script present in this github, follwing the same evaluation protocol as for the OOD val set.
+This repository is the official implementation of **DriveOSS**: Dataset and Benchmark for 3D Open-set Segmentation under Adverse Weather in Autonomous Driving. 
 
 ⏳ **Dataset coming soon.**
 
 ## 🚀 News
-- **[2026/10]:** [Project page](https://bhanderisavan.github.io/publications/2027/driveoss/) Project page online
+- **[2026/10]:** [Preprint]() Available
+- **[2026/10]:** [Project page](https://bhanderisavan.github.io/publications/2027/driveoss/) Online
 - **[2026/10]:** DriveOSS accepted at WACV 2027. (Round 2 acceptance)
 
+## 📑 Table of Contents
+- [Summary](#summary)
+- [Dataset Organization](#dataset-organization)
+- [Dataset and Pre-trained Models Download](#dataset-and-pre-trained-models-download)
+- [Requirements and Environment Setup](#requirements-and-environment-setup)
+- [Data Visualization](#data-visualization)
+- [Training Benchmark Models](#training-benchmark-models)
+- [Inference and Anomaly Scoring](#inference-and-anomaly-scoring)
+- [Open-Set Evaluation](#open-set-evaluation)
+- [Citation](#citation)
 
-#### Dataset Organization
+## Summary
+
+**DriveOSS** is a multimodal dataset for 3D open-set semantic segmentation autonomous driving. It contains 12,661 synchronized and annotated frames captured using six surround-view RGB cameras, a 128-beam LiDAR, and a GPS/IMU unit. The dataset comprises 52 real-world driving scenes collected under clear, nighttime, cloudy, rainy, and snowy conditions and is organized into ID (in-distribution) and OOD (out-of-distribution) subsets.
+
+**NOTE about DriveOSS-OOD Test Set**: Annotations for the OOD test split are not provided in order to ensure fair and unbiased evaluation. A public evaluation server for evaluation on the DriveOSS-OOD test set is planned upon acceptance in the future, but for now, please send us the predictions results and anomaly scores on the test set. Please also include the evaluation results for each anomaly scoring method on the val set as a zip file. These files contain threshold values for each anomaly scores, which are needed for open set evaluation on the test set. We will run the evaluation using the [evaluate_multi_sequence_openset.py](./evaluate_multi_sequence_openset.py) script present in this github, follwing the same evaluation protocol as for the OOD val set.
+
+ <p align="center">
+<img  src="assets/anomaly_objects.png" width="90%" />
+</p>
+<p align="center">
+ <em>
+Representative anomalies in the DriveOSS dataset.
+</em>
+
+## Dataset Organization
 
   The dataset is organized into two subsets:
 </p>
@@ -118,8 +155,7 @@ under rainy conditions.
 
 ## Dataset and Pre-trained Models Download
 
-The full DriveOSS dataset, along with the pretrained benchmark models  will be made publicly available upon acceptance.
-
+The full DriveOSS dataset, along with the pretrained benchmark models  will soon be made publicly available.
 
 ## Requirements and Environment Setup
 
@@ -229,6 +265,6 @@ bash eval_all_anomaly_per_weather.sh
 
 
 ## Citation
-TODO - upon acceptancce.
+TODO - upon acceptance.
 
 
