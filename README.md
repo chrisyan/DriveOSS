@@ -263,8 +263,19 @@ bash eval_all_anomaly_17seq.sh
 bash eval_all_anomaly_per_weather.sh
 ```
 
-
 ## Citation
-TODO - upon acceptance.
 
+If you find our work useful in your research, please consider citing:
+
+```bibtex
+@misc{yan2026driveossdatasetbenchmark3d,
+      title={DriveOSS: Dataset and Benchmark for 3D Anomaly Segmentation and Open-set Semantic Segmentation in Autonomous Driving}, 
+      author={Zhiran Yan and Savankumar Bhanderi and Sourabh Lolge and Rui Song and Girdharbhai Paneliya and Shiva Agrawal and Gordon Elger},
+      year={2026},
+      eprint={2610.32612},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2610.32612}
+}
+```
 
