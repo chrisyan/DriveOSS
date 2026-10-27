@@ -258,12 +258,10 @@ Alternatively, run the bash file to automatically generate evaluation json for e
 cd /path/to/DriveOSS
 # to evaluate all anomaly scoring methods on the entire DriveOSS-OOD val set.
 bash eval_all_anomaly_17seq.sh
-
+```
 
 ## Citation
-
 If you find our work useful in your research, please consider citing:
-
 ```bibtex
 @misc{yan2026driveossdatasetbenchmark3d,
       title={DriveOSS: Dataset and Benchmark for 3D Anomaly Segmentation and Open-set Semantic Segmentation in Autonomous Driving}, 
