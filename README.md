@@ -5,7 +5,7 @@
 ### 🌟 Accepted at WACV 2027 dataset track 🌟
 
 [![Project](https://img.shields.io/badge/Project-Page-blue.svg)](https://bhanderisavan.github.io/publications/2027/driveoss/)&nbsp;&nbsp;
-[![arXiv](https://img.shields.io/badge/arXiv-Paper-red.svg)]()&nbsp;&nbsp;
+[![arXiv](https://img.shields.io/badge/arXiv-Paper-red.)](https://arxiv.org/abs/2610.32612)&nbsp;&nbsp;
 [![dataset](https://img.shields.io/badge/DriveOSS-Dataset-green)]()&nbsp;&nbsp;
 
 
