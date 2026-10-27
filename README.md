@@ -5,8 +5,8 @@
 ### 🌟 Accepted at WACV 2027 dataset track 🌟
 
 [![Project](https://img.shields.io/badge/Project-Page-blue.svg)](https://bhanderisavan.github.io/publications/2027/driveoss/)&nbsp;&nbsp;
-[![arXiv](https://img.shields.io/badge/arXiv-Paper-red.)](https://arxiv.org/abs/2610.32612)&nbsp;&nbsp;
-[![dataset](https://img.shields.io/badge/DriveOSS-Dataset-green)]()&nbsp;&nbsp;
+[![arXiv](https://img.shields.io/badge/arXiv-Paper-red.svg)](https://arxiv.org/abs/2610.32612)&nbsp;&nbsp;
+[![dataset](https://img.shields.io/badge/DriveOSS-Dataset-green.svg)]()&nbsp;&nbsp;
 
 
 [Zhiran Yan](https://www.linkedin.com/in/zhiran-yan-73b3b7197/)<sup>1,<a href="mailto:zhiran.yan@outlook.com?subject=DriveOSS" style="color: #4799e0; text-decoration: underline;">📧</a></sup>,&nbsp;
